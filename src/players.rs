@@ -26,7 +26,36 @@ impl Display for Player {
    } 
 }
 
-
+impl PartialEq for PlayerClass {
+    fn eq(&self, other: &Self) -> bool {
+        match self {
+            PlayerClass::SerpentMage => {
+                match other {
+                    PlayerClass::SerpentMage => true,
+                    _ => false,
+                }
+            },
+            PlayerClass::GoldenGofer => {
+                match other {
+                    PlayerClass::GoldenGofer => true,
+                    _ => false,
+                }
+            },
+            PlayerClass::Rustacean => {
+                match other {
+                    PlayerClass::Rustacean => true,
+                    _ => false,
+                }
+            },
+            PlayerClass::JavaGenie => {
+                match other {
+                    PlayerClass::JavaGenie => true,
+                    _ => false,
+                }
+            }
+        }
+    }
+}
 
 impl From<String> for PlayerClass {
     fn from(s: String) -> Self {
@@ -92,31 +121,15 @@ impl Player {
             PlayerClass::GoldenGofer => "GoldenGofer".to_string()
         }
     }
-
-//   pub fn find_item(&mut self, item: String) {
-//        if let Some(bag) = &mut self.bag {
-//            bag.find_item(item);
-//        } else {
-//            println!("Player has no bag to search for items");
-//        }
-//    }
-//
-//    pub fn add_item(&mut self, item: String) {
-//        if let Some(bag) = &mut self.bag {
-//            bag.add_item(item);
-//        } else {
-//            println!("Player has no bag to add items");
-//        }
-//    }
-//
-//    pub fn remove_item(&mut self, item: String) {
-//        if let Some(bag) = &mut self.bag {
-//            bag.remove_item(item);
-//        } else {
-//            println!("Player has no bag to remove items");
-//        }
-//    }
 }
 
-    
+#[cfg(test)]    
+mod tests {
+    use super::*;
 
+    #[test]
+    fn test_create_player() {
+        let p = Player::new("Frank".to_string(), "Rustacean".to_string());
+        assert_eq!(p.class, PlayerClass::Rustacean);
+    }
+}
